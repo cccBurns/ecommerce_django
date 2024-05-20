@@ -5,8 +5,8 @@
 <header class="bg-dark py-5">
     <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder">Actualizar Usuario</h1>
-            <p class="lead fw-normal text-white-50 mb-0">Actualiza tu Perfil</p>
+            <h1 class="display-4 fw-bolder">Actualizar Informacion</h1>
+            <p class="lead fw-normal text-white-50 mb-0">Actualiza tu Informacion</p>
         </div>
     </div>
 </header>
@@ -17,17 +17,16 @@
             <div class="col-md-6 offset-md-3">
                 
                 <br><br>
-                <form method="POST" action="{% url 'update_user' %}">
+                <form method="POST" action="{% url 'update_info' %}">
                     {% csrf_token %}
 
-                    {{ user_form.as_p }}
+                    {{ form.as_p }}
                     <br><br>
                     <button type="submit" class="btn btn-secondary">Actualizar Perfil</button>
 
                 </form>
                 <br><br>
-                <a href="{% url 'update_password' %}" class="btn btn-secondary">Actualizar Password</a>
-
+                
                 <br><br>
                 <br><br>
                 <br><br>
