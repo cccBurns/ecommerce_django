@@ -4,20 +4,49 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+
+from payment.forms import ShippingForm
+from payment.models import ShippingAddress
+
 from .forms import SignUpForm, UpdateUserForm, ChangePasswordForm, UserInfoForm
 from django import forms
+from django.db.models import Q
+import json
+from cart.cart import Cart
+
+def search(request):
+    # Deternine if they filled out the form
+    if request.method == "POST":
+        searched = request.POST['searched']
+        # Query the products DB model        
+        searched = Product.objects.filter(Q(name__icontains=searched) | Q(description__icontains=searched))
+        # Test for null
+        if not searched:
+            messages.success(request, "Producto no encontrado")
+            return render(request, "search.html", {})
+        else:
+            return render(request, "search.html", {'searched':searched})
+    else:
+        return render(request, "search.html", {})
+    
 
 
 def update_info(request):
     if request.user.is_authenticated:
+        # Get Current User
         current_user = Profile.objects.get(user__id=request.user.id)
-        form = UserInfoForm(request.POST or None, instance=current_user)
+        # Get Current users Shipping Info
+        shipping_user = ShippingAddress.objects.get(id=request.user.id)
         
+        # Get original user form
+        form = UserInfoForm(request.POST or None, instance=current_user)
+        # Get Users Shipping Form
+        shipping_form = ShippingForm(request.POST or None, instance=shipping_user)
         if form.is_valid():
             form.save()            
             messages.success(request, "Informacion Actualizada!")
             return redirect('home')
-        return render(request, "update_info.html", {'form':form})
+        return render(request, "update_info.html", {'form':form, 'shipping_form':shipping_form })
     else:
         messages.success(request, "Debes loguearte para tener acceso a esta pagina")
         return redirect('home')   
@@ -102,6 +131,22 @@ def login_user(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
+            
+            # Do some shopping cart stuff
+            current_user = Profile.objects.get(user__id=request.user.id)
+            # Get their saved cart from database
+            saved_cart = current_user.old_cart
+            # Convert datebase string to python dictionary
+            if saved_cart:
+                # Convert to dictionary using JSON
+                converted_cart = json.loads(saved_cart)
+                # Add the loaded cart dictionaty to our session
+                # Get the cart
+                cart = Cart(request)
+                # Loop thru the cart and add the items from the database
+                for key, value in converted_cart.items():
+                    cart.db_add(product=key, quantity=value)
+            
             messages.success(request, ("Usuario y Contraseña Correcta"))
             return redirect('home')   
         else:
