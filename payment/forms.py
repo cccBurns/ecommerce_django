@@ -1,5 +1,6 @@
 from django import forms
 from .models import ShippingAddress
+from .models import Order, OrderItem
 
 class ShippingForm(forms.ModelForm):
     shipping_full_name = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Nombre completo'}), required=True)
