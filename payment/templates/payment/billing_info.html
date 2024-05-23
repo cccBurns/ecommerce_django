@@ -6,8 +6,8 @@
         <header class="bg-dark py-5">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">Checkout</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">Revisa tu Order</p>
+                    <h1 class="display-4 fw-bolder">Informacion de Facturacion</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">ingresa tu información de pago</p>
                 </div>
             </div>
         </header>
@@ -49,14 +49,35 @@
                           Informacion de Envio
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="{% url 'billing_info' %}" >
-                             {% csrf_token %}
-                          {{ shipping_form.as_p }}
+                            
+                          Nombre: {{ shipping_info.shipping_full_name }} <br>
+                          Correo Email: {{ shipping_info.shipping_email }} <br>
+                          Nombre: {{ shipping_info.shipping_address1 }} <br>
+                          Apellido: {{ shipping_info.shipping_address2 }} <br>
+                          Ciudad: {{ shipping_info.shipping_city }} <br>
+                          Provincia: {{ shipping_info.shipping_state }} <br>
+                          Codigo Postal: {{ shipping_info.shipping_zipcode }} <br>
+                          Pais: {{ shipping_info.shipping_country }} <br>
+                          <br>
+                          <a href="{% url 'checkout' %}" class="btn btn-outline-secondary">Actualizar Envio</a>
+
                         </div>
                       </div>
-                      <br>
-                      <button type="submit" class="btn btn-secondary">Continuar con la Compra</button>
-                    </form>
+                      <br><br>
+
+                      <div class="card">
+                        <div class="card-header">
+                          Informacion de Facturacion
+                        </div>
+                        <div class="card-body">                            
+                          {{ billing_form.as_p }} 
+
+                        </div>
+                      </div>
+                      <br><br>
+
+                      <a href="#" class="btn btn-secondary">Pagar</a>
+                    
                       <br><br>
 
 
