@@ -77,13 +77,19 @@
               <br>
 
             {% endfor %}
+            <div aling="right">
             <h3>Total: ${{ totals }} </h3>
+            <a href="{% url 'checkout' %}" class="btn btn-success">
+              Checkout
+            </a>
+            </div>
             <br><br><br>
             {% else %}
             Carrito Vacio
-        </div>
-        <br><br><br><br><br>
-        {% endif %}
+            <br><br><br><br><br><br>
+            <br><br><br><br><br>
+            {% endif %}
+          </div>
                
         
          {% comment %} Update Cart {% endcomment %}
