@@ -11,7 +11,7 @@
                 <br><br>
                 <div class="card">
                     <div class="card-header">
-                    Orden {{ order.id }} - ${{order.amount_paid}}
+                    Orden {{ order.id }} - ${{ order.amount_paid }}
                     </div>
                     <div class="card-body">
                         Email: {{ order.email }} <br>
@@ -20,7 +20,7 @@
                         {% else %}
                         Dato de Orden: {{ order.date_ordered }}
                         {% endif %}
-                        <br><br>
+                        <br> <br>
                         {{ order.full_name }} <br>
                         <pre>{{ order.shipping_address }} <br>
                         </pre>
