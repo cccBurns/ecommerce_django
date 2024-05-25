@@ -1,2 +1,5 @@
 # ecommerce_django
-ecomme
+Ecommerce con Django / Python
+
+Autor: Christian Burns
+
