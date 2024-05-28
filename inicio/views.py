@@ -15,10 +15,11 @@ import json
 from cart.cart import Cart
 
 def search(request):
-    # Deternine if they filled out the form
+    # Determinar si llenaron el Form
     if request.method == "POST":
+        # Obtencion del termino de busqueda
         searched = request.POST['searched']
-        # Query the products DB model        
+        # Consulta a la base de datos (La funcion 'Q' realiza consultas con condiciones OR)  
         searched = Product.objects.filter(Q(name__icontains=searched) | Q(description__icontains=searched))
         # Test for null
         if not searched:
@@ -33,16 +34,16 @@ def search(request):
 
 def update_info(request):
     if request.user.is_authenticated:
-        # Get Current User
+        # Obtener Usuario
         current_user = Profile.objects.get(user__id=request.user.id)
-        # Get Current users Shipping Info
+        # Obtener Direccion de envio del usuario
         shipping_user = ShippingAddress.objects.get(user__id=request.user.id)
-        
+        # Creacion de instancias de formularios
         # Get original user form
         form = UserInfoForm(request.POST or None, instance=current_user)
         # Get Users Shipping Form
         shipping_form = ShippingForm(request.POST or None, instance=shipping_user)
-        
+        # Validacion y guardado de formularios
         if form.is_valid() or shipping_form.is_valid():
             # Save original form
             form.save()
@@ -105,11 +106,12 @@ def category_summary(request):
     
 
 def category(request, foo):
-    # Replace Hyphens with Spaces
+    # Reemplazo Guiones por Espacios
     foo = foo.replace('-', '')
-    # Grab the category from the url
+    # Toma la Categoria de la URL
+    # Intenta Buscar la Categoria en la Base de Datos
     try:
-        # Look up the Category
+        # Busqueda de Categoria
         category = Category.objects.get(name=foo)
         products = Product.objects.filter(category=category)
         return render(request, 'category.html', {'products':products, 'category':category})
@@ -137,16 +139,16 @@ def login_user(request):
         if user is not None:
             login(request, user)
             
-            # Do some shopping cart stuff
+            # Hacer Algunas Cosas del Carrito de Compras
             current_user = Profile.objects.get(user__id=request.user.id)
-            # Get their saved cart from database
+            # Obtener su Carrito Guardado de la base de Datos
             saved_cart = current_user.old_cart
-            # Convert datebase string to python dictionary
+            # Convertir String de BD a Diccionario
             if saved_cart:
-                # Convert to dictionary using JSON
+                # Convertir a Diccionario usando JSON
                 converted_cart = json.loads(saved_cart)
-                # Add the loaded cart dictionaty to our session
-                # Get the cart
+                # Añadir el diccionario del carrito cargado a nuestra sesión
+                # Obtener el Carrito
                 cart = Cart(request)
                 # Loop thru the cart and add the items from the database
                 for key, value in converted_cart.items():
