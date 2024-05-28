@@ -257,6 +257,24 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
   text-decoration: none;
 }
 
+/* Estilos de Footer */
+/* a {
+  text-decoration: none;
+  font-size: 17px;
+}
+
+p {
+  font-size: 17px;
+}
+
+a:hover {
+  color: #0D6EFD !important;
+}
+
+i {
+  font-size: 25px;
+} */
+
 pre,
 code,
 kbd,

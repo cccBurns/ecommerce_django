@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
 {% block content  %}
 
+
 <!-- Header-->
 <header class="bg-dark py-5">
     <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder">Buscar Producto</h1>
-            <p class="lead fw-normal text-white-50 mb-0">Encuentra el Producto que estas buscando.</p>
+            <h1 class="display-4 fw-bolder"><span style="color: #0D6EFD">B</span>uscar Producto</h1>
+            <p class="lead fw-normal text-white-50 mb-0">Encontra el Producto que estas buscando.</p>
         </div>
     </div>
 </header>
@@ -16,9 +17,9 @@
         <center>
             <div class="col-10">
                 <br><br>
-                <div class="card">
+                <div class="card border-primary mb-3" style="max-width: 30rem;">
                     <div class="card-header">
-                      Buscar Producto
+                      <strong>Buscador</strong>
                     </div>
                     <div class="card-body">
                       <form method="POST" action="{% url 'search' %}">
@@ -96,7 +97,7 @@
                     {% endfor %}
                     {% endif %}
                 </div>
-                  <br><br><br><br><br><br><br><br><br><br>
+                  <br><br><br><br>
             </div>
         </center>
     </div>
