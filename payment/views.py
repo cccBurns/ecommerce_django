@@ -70,7 +70,7 @@ def process_order(request):
             # Get product Info
             for product in cart_products():
                 # Get product ID
-                product_id = product_id
+                product_id = product.id
                 # Get product price
                 if product.is_sale:
                     price = product.sale_price
@@ -107,7 +107,7 @@ def process_order(request):
             # Get product Info
             for product in cart_products():
                 # Get product ID
-                product_id = product_id
+                product_id = product.id
                 # Get product price
                 if product.is_sale:
                     price = product.sale_price

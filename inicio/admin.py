@@ -8,19 +8,19 @@ admin.site.register(Product)
 admin.site.register(Order)
 admin.site.register(Profile)
 
-# Mix profile info and user info
+# Mezclar Información del Perfil y del Usuario
 class ProfileInline(admin.StackedInline):
     model = Profile
 
-# Extend User Model
+# Extender el Modelo de Usuario
 class UserAdmin(admin.ModelAdmin):
     model = User
     field = ["username", "first_name", "last_name", "email"]
     inlines = [ProfileInline]
     
-# Unregister the old way
+# Darse de baja a la antigua usanza
 admin.site.unregister(User)
 
-# Re-Register the new way
+# Vuelva a registrarse de la nueva manera
 admin.site.register(User, UserAdmin)
     
