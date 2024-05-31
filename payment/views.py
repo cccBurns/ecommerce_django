@@ -70,6 +70,7 @@ def shipped_dash(request):
             # Redirect
             messages.success(request, "Estado de envio Actualizado")
             return redirect('home')
+        
         return render(request, "payment/shipped_dash.html", {"orders":orders})
     else:
         messages.success(request, "Orden Realizada")

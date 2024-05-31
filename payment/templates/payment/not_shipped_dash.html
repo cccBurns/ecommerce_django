@@ -29,7 +29,7 @@
                             <td> {{ item.email }} </td>
                             <td> {{ item.date_ordered }} </td>
                             <td>
-                              <form method"POST">
+                              <form method="POST">
                                 {% csrf_token %}
                                 <input type="hidden" name="shipping_status" value="true">
                                 <input type="hidden" name="num" value={{item.id}}>
