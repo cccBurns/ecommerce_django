@@ -17,6 +17,7 @@
                         <th scope="col">Precio</th>
                         <th scope="col">Email Cliente</th>
                         <th scope="col">Fecha de Envio</th>
+                        <th scope="col">Estado de Envio</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -26,11 +27,22 @@
                             <td> ${{ item.amount_paid }} </td>
                             <td> {{ item.email }} </td>
                             <td> {{ item.date_shipped }} </td>
+                            <td>
+                              <form method"POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="shipping_status" value="False">
+                                <input type="hidden" name="num" value={{item.id}}>
+                                <button type="Submit" class="btn btn-danger btn-sm">Marcar como No Enviado</button>
+                              </form>
+                            </td>
                         </tr>
                         {% endfor %}                      
                       
                     </tbody>
                   </table>
+                  <br><br><br><br>
+                  <br><br><br><br>
+
                 </div>
         </center>
     </div>
