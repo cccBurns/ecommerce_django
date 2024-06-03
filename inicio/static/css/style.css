@@ -265,15 +265,15 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
 
 p {
   font-size: 17px;
-}
-
-a:hover {
-  color: #0D6EFD !important;
-}
-
-i {
-  font-size: 25px;
 } */
+
+/* .footermio a:hover {
+  color: #0D6EFD !important;
+} */
+
+/* i {
+  font-size: 25px;
+} */ */
 
 pre,
 code,
