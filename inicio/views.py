@@ -131,6 +131,9 @@ def home(request):
 def about(request):
     return render(request, 'about.html', {})
 
+def contacto(request):
+    return render(request, 'contacto.html', {})
+
 def login_user(request):
     if request.method == "POST":
         username = request.POST['username']
