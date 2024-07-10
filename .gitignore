@@ -3,6 +3,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,django,visualstudiocode
 
 ### Django ###
+
 *.log
 *.pot
 *.pyc
@@ -284,3 +285,4 @@ pyrightconfig.json
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/python,django,visualstudiocode
+
