@@ -1,2 +1,1 @@
-web: gunicorn inicio.wsgi --log-file
-web: python manage.py migrate && gunicorn inicio.wsg
+web: gunicorn ecommerce.wsgi

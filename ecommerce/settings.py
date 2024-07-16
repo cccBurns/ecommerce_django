@@ -11,16 +11,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv()
 
 # password DB
-#DB_PASSWORD_YO = os.environ['DB_PASSWORD_YO']
+DB_PASSWORD_YO = os.environ['DB_PASSWORD_YO']
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-&#gn=qi20$708j1ui@*^08s36uw0^_9%d@fwj68i%a@2#r(7k%'
+SECRET_KEY = os.getenv('SECRET_KEY', 'default-secret-key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = ['ecommercedjango-production.up.railway.app', 'https://ecommercedjango-production.up.railway.app']
 CSRF_TRUSTED_ORIGINS = ['https://ecommercedjango-production.up.railway.app']
@@ -83,7 +83,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'railway',
         'USER': 'postgres',
-        'PASSWORD': 'DB_PASSWORD_YO',
+        'PASSWORD': os.getenv('DB_PASSWORD_YO'),
         'HOST': 'roundhouse.proxy.rlwy.net',
         'PORT': '16025',
         
@@ -126,7 +126,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = ['static/']
+STATICFILES_DIRS = [BASE_DIR / 'static']
 
 # White noise static stuff
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
