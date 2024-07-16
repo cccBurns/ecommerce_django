@@ -76,11 +76,11 @@ WSGI_APPLICATION = 'ecommerce.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME', 'railway'),
-        'USER': os.getenv('DB_USER', 'postgres'),
-        'PASSWORD': os.getenv('DB_PASSWORD_YO'),
-        'HOST': os.getenv('DB_HOST', 'roundhouse.proxy.rlwy.net'),
-        'PORT': os.getenv('DB_PORT', '16025'),
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': 'DB_PASSWORD_YO',
+        'HOST': 'roundhouse.proxy.rlwy.net',
+        'PORT': '16025',
     }
 }
 
