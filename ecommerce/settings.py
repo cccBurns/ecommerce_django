@@ -8,6 +8,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Load our environmental variables
 load_dotenv()
 
+# password DB
+DB_PASSWORD_YO = os.environ['DB_PASSWORD_YO']
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
@@ -15,7 +18,7 @@ load_dotenv()
 SECRET_KEY = os.getenv('SECRET_KEY', 'default-secret-key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', 'False') == 'True'
+DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = ['ecommercedjango-production.up.railway.app', 'https://ecommercedjango-production.up.railway.app']
 CSRF_TRUSTED_ORIGINS = ['https://ecommercedjango-production.up.railway.app']
@@ -29,7 +32,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'inicio',
+    'inicio',    
     'cart',
     'payment',
     'whitenoise.runserver_nostatic',
@@ -73,11 +76,11 @@ WSGI_APPLICATION = 'ecommerce.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',
+        'NAME': os.getenv('DB_NAME', 'railway'),
+        'USER': os.getenv('DB_USER', 'postgres'),
         'PASSWORD': os.getenv('DB_PASSWORD_YO'),
-        'HOST': 'roundhouse.proxy.rlwy.net',
-        'PORT': '16025',
+        'HOST': os.getenv('DB_HOST', 'roundhouse.proxy.rlwy.net'),
+        'PORT': os.getenv('DB_PORT', '16025'),
     }
 }
 
@@ -114,19 +117,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [BASE_DIR / 'static']
 
 # White noise static stuff
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_URL = 'media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
-]
